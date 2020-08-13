@@ -140,11 +140,13 @@ def NN_train(pathdir, filename, epochs=1000, lrs=1e-2, N_red_lr=4, pretrained_pa
                     if check_es_loss < loss:
                         break
                     else:
-                        torch.save(model_feynman.state_dict(), "results/NN_trained_models/models/" + filename + ".h5")
+                        os.makedirs("results/NN_trained_models/models", exist_ok=True)
+                        torch.save(model_feynman.state_dict(), "results/NN_trained_models/models" + filename.replace('/','') + ".h5")
                         check_es_loss = loss
                 if epoch==0:
                     if check_es_loss < loss:
-                        torch.save(model_feynman.state_dict(), "results/NN_trained_models/models/" + filename + ".h5")
+                        os.makedirs("results/NN_trained_models/models", exist_ok=True)
+                        torch.save(model_feynman.state_dict(), "results/NN_trained_models/models" + filename.replace('/','') + ".h5")
                         check_es_loss = loss
         
             print(loss)

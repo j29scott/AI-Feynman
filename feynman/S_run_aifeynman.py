@@ -173,14 +173,14 @@ def run_aifeynman(pathdir,filename,BF_try_time,BF_ops_file_type, polyfit_deg=3, 
             continue
     PA_list = PA.get_pareto_points()
 
-    np.savetxt("results/solution_before_snap_%s.txt" %filename,PA_list,fmt="%s")
+    # np.savetxt("results/solution_before_snap_%s.txt" %filename,PA_list,fmt="%s")
 
     # Run zero, integer and rational snap on the resulted equations
     for j in range(len(PA_list)):
         PA = add_snap_expr_on_pareto(pathdir,filename,PA_list[j][-1],PA, "")
 
     PA_list = PA.get_pareto_points()
-    np.savetxt("results/solution_first_snap_%s.txt" %filename,PA_list,fmt="%s")
+    # np.savetxt("results/solution_first_snap_%s.txt" %filename,PA_list,fmt="%s")
 
     # Run gradient descent on the data one more time
     final_gd_data = np.loadtxt(pathdir+filename)
@@ -216,5 +216,6 @@ def run_aifeynman(pathdir,filename,BF_try_time,BF_ops_file_type, polyfit_deg=3, 
         save_data = np.column_stack((test_errors,log_err,log_err_all,list_dt))
     else:
         save_data = np.column_stack((log_err,log_err_all,list_dt))
-    np.savetxt("results/solution_%s" %filename_orig,save_data,fmt="%s")
+    return list_dt
+    # np.savetxt("results/solution_%s" %filename_orig,save_data,fmt="%s")
 
